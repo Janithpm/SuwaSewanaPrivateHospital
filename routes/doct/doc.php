@@ -42,6 +42,8 @@ if (isset($_POST['btn-admit'])) {
 
         $sq =  "INSERT INTO patient_admit VALUES ($patientID, $docID)";
         if (mysqli_query($conn, $sq)) {
+
+            $admit
         ?>
             <script>
                 alert("Patient ID<?php echo $paitentID ?>\n Admited_by : <?php echo $DocID ?>")
