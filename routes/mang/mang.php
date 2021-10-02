@@ -14,6 +14,9 @@ if (isset($_POST['EmpPanel'])) {
 if (isset($_POST['VendorPanel'])) {
     header('Location: vendor/vendor.php');
 }
+if (isset($_POST['SuppliesPanel'])) {
+    header('Location: supplies/supplies.php');
+}
 if (isset($_POST['WordPanel'])) {
     header('Location: word/word.php');
 }
@@ -22,6 +25,12 @@ if (isset($_POST['UnitPanel'])) {
 }
 if (isset($_POST['BedPanel'])) {
     header('Location: bed/bed.php');
+}
+if (isset($_POST['DrugPanel'])) {
+    header('Location: drug/drug.php');
+}
+if (isset($_POST['TestPanel'])) {
+    header('Location: test/test.php');
 }
 
 ?>
@@ -62,41 +71,62 @@ if (isset($_POST['BedPanel'])) {
             <?php titleBox("DASHBOARD : MANAGER", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../config/logout.php", "mang.php", false); ?>
             <form method="post" action="">
                 <div class="row" style="margin:15px 0;">
-                    <div class="col-md-6" style="height: 250px;">
+                    <div class="col-md-3" style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h3 class="h3">Employee Management</h3>
-                            <h5 class="h5">View / Add / Update / Delete Employee Details</h5>
+                            <h4 class="h4">Employee Management</h4>
+                            <h6 class="h6">View / Add / Update / Delete Employee Details</h6>
                             <button name="EmpPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
-                    <div class="col-md-6" style="height: 250px;">
+                    <div class="col-md-3" style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h3 class="h3">Vendor Management</h3>
-                            <h5 class="h5">View / Add / Update / Delete Vendor Details</h5>
+                            <h4 class="h4">Vendor Management</h4>
+                            <h6 class="h6">View / Add / Update / Delete Vendor Details</h6>
                             <button name="VendorPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="height: 250px;">
+                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
+                            <h4 class="h4">Supplies Management</h4>
+                            <h6 class="h6">View / Add Update Supplies Records</h6>
+                            <button name="SuppliesPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="height: 250px;">
+                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
+                            <h4 class="h4">Drug Management</h4>
+                            <h6 class="h6">View / Add Update Drug Details</h6>
+                            <button name="DrugPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
                 </div>
                 <div class="row" style="margin:15px 0;">
-                    <div class="col-md-4 " style="height: 250px;">
+                    <div class="col-md-3 " style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
                             <h4 class="h4">Word Management</h4>
                             <h6 class="h6">View / Add / Update / Delete Word Details</h6>
                             <button name="WordPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
-                    <div class="col-md-4" style="height: 250px;">
+                    <div class="col-md-3" style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
                             <h4 class="h4">Diagnostic Unit Management</h4>
                             <h6 class="h6">View / Add / Update / Delete Diagnostic Unit Details</h6>
                             <button name="UnitPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
-                    <div class="col-md-4" style="height: 250px;">
+                    <div class="col-md-3" style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
                             <h4 class="h4">Bed Management</h4>
                             <h6 class="h6">View / Add / Update / Delete Bed Details</h6>
                             <button name="BedPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                        </div>
+                    </div>
+                    <div class="col-md-3" style="height: 250px;">
+                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
+                            <h4 class="h4">Test Management</h4>
+                            <h6 class="h6">View / Add / Update / Delete Bed Details</h6>
+                            <button name="TestPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
                 </div>

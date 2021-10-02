@@ -4,8 +4,16 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/config/session.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/components/titleBox.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/components/inputElement.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/components/buttonElement.php');
+date_default_timezone_set("Asia/Colombo");
 
 $USER = getSessionData();
+
+
+
+
+
+
+
 
 if (isset($_GET['btn-select'])) {
     $values = explode(" ", $_GET['btn-select']);
@@ -41,6 +49,9 @@ if (isset($_GET['btn-select'])) {
         }
     }
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +85,7 @@ if (isset($_GET['btn-select'])) {
 <body>
     <main>
         <div class="container">
-            <?php titleBox("DASHBOARD : NURSE", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "../nur.php", true); ?>
+            <?php titleBox("DASHBOARD : DOCTOR", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "../nur.php", true); ?>
 
             <div class="card mt-3 shadow">
                 <h5 class="card-header"><?php echo $patient_type ?> Patient Report</h5>
@@ -90,8 +101,21 @@ if (isset($_GET['btn-select'])) {
                     } else {
                     ?>
                         <div class="d-flex justify-content-end">
-                            <a href="report.php" class="btn btn-success" style="margin: 0 15px;">Admit The Patient</a>
-                            <a href="report.php" class="btn btn-primary">Go Back</a>
+                            <form method="post" action="doc.php?id=<?php echo $_GET['btn-select'] ?>">
+                                <?php
+                                if ($patient_type == "IN") {
+                                ?>
+                                    <button name="btn-discharge" class="btn btn-success" style="margin: 0 15px;">Discharge The Patient</button>
+
+                                <?php
+                                } else {
+                                ?>
+                                    <button name="btn-admit" class="btn btn-success" style="margin: 0 15px;">Admit The Patient</button>
+                                <?php
+                                }
+                                ?>
+                            </form>
+                            <a href="doc.php" class="btn btn-primary">Go Back</a>
                         </div>
                         <div class="d-flex justify-content-center mt-3">
 
@@ -175,5 +199,21 @@ if (isset($_GET['btn-select'])) {
         </div>
     </main>
 </body>
+
+<script>
+    function viewDischarge() {
+        console.log('viewDischarge');
+        document.getElementById('discharge').style = 'display: block';
+        document.getElementById('viewReport').style = 'display: none';
+    }
+
+    function viewAdmit() {
+        console.log('viewAdmit');
+        document.getElementById('admit').style = 'display: block';
+        document.getElementById('viewReport').style = 'display: none';
+    }
+</script>
+
+
 
 </html>
