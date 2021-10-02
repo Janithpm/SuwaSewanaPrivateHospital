@@ -123,7 +123,7 @@ if (isset($_POST['btn-delete'])) {
                         <h2 class="h2">Vendor Register Number : <?php echo isset($id) ? $vendor_regNo : ""; ?></h2>
                         <div>
                             <a onclick="enableEdit()" id="btn-edit" class="btn btn-success"> Edit Details</a>
-                            <?php buttonElement("btn-delete", "btn btn-danger", " - Delete Word", "btn-delete", "") ?>
+                            <?php buttonElement("btn-delete", "btn btn-danger", " - Delete Vendor", "btn-delete", "") ?>
                         </div>
                     </div>
 

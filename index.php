@@ -92,7 +92,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="pwd" class="form-label">Password</label>
-                        <input type="pwd" name="pwd" class="form-control" id="pwd" />
+                        <input type="password" name="pwd" class="form-control" id="pwd" />
                     </div>
                     <button type="submit" name="login" value="login" class="btn btn-primary">LOGIN</button>
                 </form>

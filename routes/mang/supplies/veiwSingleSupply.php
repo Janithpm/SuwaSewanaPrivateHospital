@@ -108,7 +108,7 @@ if (isset($_GET['btn-select'])) {
                                     <tr>
                                         <td>Total Cost</td>
                                         <td>:</td>
-                                        <td><?php echo $quantity * $unit_cost; ?></td>
+                                        <td><?php echo (float)($quantity) * $unit_cost; ?></td>
                                     </tr>
 
                                     <tr>

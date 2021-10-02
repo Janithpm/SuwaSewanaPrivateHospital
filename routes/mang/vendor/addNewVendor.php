@@ -34,7 +34,7 @@ if (isset($_POST['btn-add-next'])) {
 
 ?>
 <div class="card mt-3 shadow">
-    <h5 class="card-header">ADD NEW NEW VENDOR</h5>
+    <h5 class="card-header">ADD NEW VENDOR</h5>
     <div class="card-body">
         <h5 class="card-title">Enter The Details Of New Vendor : </h5>
         <div class="d-flex justify-content-center mt-3">

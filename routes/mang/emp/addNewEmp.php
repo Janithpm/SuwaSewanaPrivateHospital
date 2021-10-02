@@ -173,7 +173,7 @@ if (isset($_POST['btn-add-next'])) {
             <input type="text" class="form-control" id="dea_no" name="dea_no">
         </div>
         <div class="form-group mb-2 col-md-4">
-            <label for="speciality">specialityiality</label>
+            <label for="speciality">speciality</label>
             <input type="text" class="form-control" id="speciality" name="speciality">
         </div>
     </div>

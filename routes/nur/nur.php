@@ -14,6 +14,12 @@ if (isset($_POST['PatientPanel'])) {
 if (isset($_POST['ReportPanel'])) {
     header('Location: report/report.php');
 }
+if (isset($_POST['EmeContactPanel'])) {
+    header('Location: emegencyContact/emegencyContact.php');
+}
+if (isset($_POST['InsurancePanel'])) {
+    header('Location: insurance/insurance.php');
+}
 
 
 
@@ -69,6 +75,22 @@ if (isset($_POST['ReportPanel'])) {
                             <h3 class="h3">Report Management</h3>
                             <h5 class="h5">View / Add / Update / Report Details</h5>
                             <button name="ReportPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:15px 0;">
+                    <div class="col-md-6" style="height: 250px;">
+                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
+                            <h3 class="h3">Emegency Contact</h3>
+                            <h5 class="h5">View / Add / Update Emegency Contact</h5>
+                            <button name="EmeContactPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="height: 250px;">
+                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
+                            <h3 class="h3">Insurance Details</h3>
+                            <h5 class="h5">View / Add / Update / Insurence Details</h5>
+                            <button name="InsurancePanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
                 </div>
