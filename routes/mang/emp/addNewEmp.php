@@ -127,12 +127,12 @@ if (isset($_POST['btn-add-next'])) {
                             </div>
                             <div class="col-md-6">
                                 <legend class="col-form-label pt-0">Non Medical Staff</legend>
-                                <div class="form-check form-check-inline">
+                                <!-- <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="job_type" id="gridRadios2" value="MANG" onclick="mang()">
                                     <label class="form-check-label" for="gridRadios2">
                                         Management
                                     </label>
-                                </div>
+                                </div> -->
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="job_type" id="gridRadios4" value="ATD" onclick="atd()">
                                     <label class="form-check-label" for="gridRadios2">
