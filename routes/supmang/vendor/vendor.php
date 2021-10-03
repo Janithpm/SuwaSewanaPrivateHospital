@@ -42,7 +42,7 @@ $USER = getSessionData();
 <body>
     <main>
         <div class="container">
-            <?php titleBox("DASHBOARD : MANAGER", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "../mang.php", true); ?>
+            <?php titleBox("DASHBOARD : MANAGER", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "../supmang.php", true); ?>
 
             <div id="addNewEmp" style="display:none">
                 <?php include('addNewVendor.php') ?>

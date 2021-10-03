@@ -8,13 +8,6 @@ date_default_timezone_set("Asia/Colombo");
 
 $USER = getSessionData();
 
-
-
-
-
-
-
-
 if (isset($_GET['btn-select'])) {
     $values = explode(" ", $_GET['btn-select']);
     $patient_type = $values[0];
@@ -22,16 +15,15 @@ if (isset($_GET['btn-select'])) {
     $recorded_date = $values[2];
     $recorded_time = $values[3];
 
-    $sq = "SELECT name, dob FROM patient WHERE patientID = $patinetID";
+    $sq = "SELECT name FROM patient WHERE patientID = $patinetID";
     $result = mysqli_query($conn, $sq);
     if (!$result) echo "patient" . $conn->error;
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $patient_name = $row['name'];
-        $patient_dob = $row['dob'];
 
         if ($patient_type == 'IN') {
-            $sq = "SELECT * FROM in_patient_daily_record WHERE patientID = $patinetID";
+            $sq = "SELECT *, in_patient.dob FROM in_patient_daily_record INNER JOIN in_patient ON in_patient_daily_record.patientID = in_patient.patientID WHERE in_patient_daily_record.patientID = $patinetID";
         } else {
             $sq = "SELECT * FROM out_patient_record WHERE patientID = $patinetID";
         }
@@ -85,7 +77,7 @@ if (isset($_GET['btn-select'])) {
 <body>
     <main>
         <div class="container">
-            <?php titleBox("DASHBOARD : DOCTOR", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "../nur.php", true); ?>
+            <?php titleBox("DASHBOARD : DOCTOR", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "doc.php", true); ?>
 
             <div class="card mt-3 shadow">
                 <h5 class="card-header"><?php echo $patient_type ?> Patient Report</h5>
@@ -110,14 +102,16 @@ if (isset($_GET['btn-select'])) {
                                 <?php
                                 } else {
                                 ?>
-                                    <button name="btn-admit" class="btn btn-success" style="margin: 0 15px;">Admit The Patient</button>
+                                    <a onclick="viewAdmit()" class="btn btn-success" style="margin: 0 15px;">Admit The Patient</a>
                                 <?php
                                 }
                                 ?>
                             </form>
                             <a href="doc.php" class="btn btn-primary">Go Back</a>
                         </div>
-                        <div class="d-flex justify-content-center mt-3">
+                        <div class="mb-3" id="viewAdmitBox"></div>
+
+                        <div id="vprt" class="d-flex justify-content-center mt-3">
 
                             <table class="table table-hover">
                                 <tbody>
@@ -131,6 +125,18 @@ if (isset($_GET['btn-select'])) {
                                         <td>:</td>
                                         <td><?php echo $patient_name; ?></td>
                                     </tr>
+                                    <?php
+                                    if (isset($row['dob'])) {
+                                        $patient_dob = $row['dob'];
+                                    ?>
+                                        <tr>
+                                            <td>Patient Date Of Birth</td>
+                                            <td>:</td>
+                                            <td><?php echo $patient_dob; ?></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
                                     <tr>
                                         <td>Recorded Date</td>
                                         <td>:</td>
@@ -141,11 +147,7 @@ if (isset($_GET['btn-select'])) {
                                         <td>:</td>
                                         <td><?php echo $recorded_time; ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>Patient Date Of Birth</td>
-                                        <td>:</td>
-                                        <td><?php echo $patient_dob; ?></td>
-                                    </tr>
+
                                     <tr>
                                         <td>Recorded BY</td>
                                         <td>:</td>
@@ -185,6 +187,8 @@ if (isset($_GET['btn-select'])) {
                                 </tbody>
                             </table>
                         </div>
+                        <div id="viewAdmitBox"></div>
+
 
                 </div>
             <?php
@@ -201,16 +205,44 @@ if (isset($_GET['btn-select'])) {
 </body>
 
 <script>
-    function viewDischarge() {
-        console.log('viewDischarge');
-        document.getElementById('discharge').style = 'display: block';
-        document.getElementById('viewReport').style = 'display: none';
+    function viewAdmit() {
+
+        document.getElementById('viewAdmitBox').innerHTML = `
+        <div class="h-50 w-100 d-flex align-items-center" style=" min-height:200px; border-bottom: 2px solid black;">
+        <form method="post" class="w-100" action="doc.php?id=<?php echo $_GET['btn-select'] ?>">
+            <div class="row">
+            <div class="form-group mb-2 col-md-4">
+                <label for="dea_no">Word ID</label>
+                <input type="text" class="form-control" id="patient_wordID" name="patient_wordID">
+            </div>
+
+            <div class="form-group mb-2 col-md-4">
+                <label for="dea_no">Bed ID</label>
+                <input type="text" class="form-control" id="patient_bedID" name="patient_bedID">
+            </div>
+
+            </div>
+            <div class="row">
+            <div class="form-group mb-2 col-md-4">
+                <label for="dea_no">Patient Date Of Birth</label>
+                <input type="text" class="form-control" id="patient_dob" name="patient_dob">
+            </div>
+            </div>
+            <div class="mt-2">
+            <a class="btn btn-primary"onclick="hideAdmit()">Cancel</a>
+            <button name="patient-admit" class="btn btn-danger">Admit Now</button>
+            </div>
+        </form>
+        </div>
+        `;
+
     }
 
-    function viewAdmit() {
-        console.log('viewAdmit');
-        document.getElementById('admit').style = 'display: block';
-        document.getElementById('viewReport').style = 'display: none';
+    function hideAdmit() {
+        document.getElementById('viewAdmitBox').innerHTML = ``;
+        location.reload();
+
+
     }
 </script>
 

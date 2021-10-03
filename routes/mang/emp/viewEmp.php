@@ -185,6 +185,7 @@ if (isset($_POST['btn-delete'])) {
                                                 else if ($job_type == "ATD") echo "Attendent";
                                                 else if ($job_type == "CLN") echo "Cleaner";
                                                 else if ($job_type == "MANG") echo "Management";
+                                                else if ($job_type == "SUPMANG") echo "Supplies Management";
                                                 else echo "Other";
                                                 echo " )"
                                                 ?>

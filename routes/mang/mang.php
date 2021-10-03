@@ -69,27 +69,13 @@ if (isset($_POST['TestPanel'])) {
     <main>
         <div class="container">
             <?php titleBox("DASHBOARD : MANAGER", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../config/logout.php", "mang.php", false); ?>
-            <form method="post" action="">
+            <form method="post" action="" class="mt-5">
                 <div class="row text-center" style="margin:15px 0;">
-                    <div class="col-md-3" style="height: 250px;">
+                    <div class="col-md-6" style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
                             <h5 class="h5">Employee Management</h5>
                             <p class="p">View / Add / Update / Delete <br>Employee Details</p>
                             <button name="EmpPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3" style="height: 250px;">
-                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Vendor Management</h5>
-                            <p class="p">View / Add / Update / Delete <br>Vendor Details</p>
-                            <button name="VendorPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3" style="height: 250px;">
-                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Supplies Management</h5>
-                            <p class="p">View / Add Update <br>Supplies Records</p>
-                            <button name="SuppliesPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
                     <div class="col-md-3" style="height: 250px;">
@@ -99,30 +85,6 @@ if (isset($_POST['TestPanel'])) {
                             <button name="DrugPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
-                </div>
-                <div class="row text-center" style="margin:15px 0;">
-                    <div class="col-md-3 " style="height: 250px;">
-                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Word Management</h5>
-                            <p class="p">View / Add / Update / Delete <br>Word Details</p>
-                            <button name="WordPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3" style="height: 250px;">
-                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Bed Management</h5>
-                            <p class="p">View / Add / Update / Delete <br>Bed Details</p>
-                            <button name="BedPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
-                        </div>
-                    </div>
-                    <div class="col-md-3" style="height: 250px;">
-                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Diagnostic Unit Management</h5>
-                            <p class="p">View / Add / Update / Delete <br>Diagnostic Unit Details</p>
-                            <button name="UnitPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
-                        </div>
-                    </div>
                     <div class="col-md-3" style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
                             <h5 class="h5">Test Management</h5>
@@ -130,6 +92,31 @@ if (isset($_POST['TestPanel'])) {
                             <button name="TestPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
+                </div>
+                <div class="row text-center" style="margin:15px 0;">
+                    <div class="col-md-4 " style="height: 250px;">
+                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
+                            <h5 class="h5">Word Management</h5>
+                            <p class="p">View / Add / Update / Delete <br>Word Details</p>
+                            <button name="WordPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4" style="height: 250px;">
+                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
+                            <h5 class="h5">Bed Management</h5>
+                            <p class="p">View / Add / Update / Delete <br>Bed Details</p>
+                            <button name="BedPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="height: 250px;">
+                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
+                            <h5 class="h5">Diagnostic Unit Management</h5>
+                            <p class="p">View / Add / Update / Delete <br>Diagnostic Unit Details</p>
+                            <button name="UnitPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                        </div>
+                    </div>
+
                 </div>
                 <div style="width:100%; height:50px;"></div>
             </form>

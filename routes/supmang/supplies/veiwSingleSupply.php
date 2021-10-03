@@ -58,7 +58,7 @@ if (isset($_GET['btn-select'])) {
 <body>
     <main>
         <div class="container">
-            <?php titleBox("DASHBOARD : MANAGEMGNT", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "../mang.php", true); ?>
+            <?php titleBox("DASHBOARD : MANAGEMGNT", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "../supmang.php", true); ?>
 
             <div class="card mt-3 shadow">
                 <h5 class="card-header">Drug Code : <?php echo $drugCode ?></h5>

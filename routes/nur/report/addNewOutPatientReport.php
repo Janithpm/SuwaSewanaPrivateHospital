@@ -3,14 +3,14 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/dbConn.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/customFunc/textBoxValue.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/components/inputElement.php');
-
+date_default_timezone_set("Asia/Colombo");
 if (isset($_POST['btn-add-out-patient-report'])) {
 
     $query = "";
     $patientID = textboxValue("patientID");
     $recorded_by = textboxValue("recorded_by");
-    $recorded_date = textboxValue("recorded_date");
-    $recorded_time = textboxValue("recorded_time");
+    $recorded_date = textboxValue("recorded_date") ? textboxValue("recorded_date") : date("Y-m-d");
+    $recorded_time = textboxValue("recorded_time") ? textboxValue("recorded_time") : date("h:i:sa");
     $patient_pulse = textboxValue("patient_pulse");
     $patient_blood_presure = textboxValue("patient_blood_presure");
     $patinet_weight = textboxValue("patient_weight");

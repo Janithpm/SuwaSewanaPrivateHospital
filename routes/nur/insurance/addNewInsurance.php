@@ -7,6 +7,7 @@ if (isset($_POST['btn-add-next'])) {
     $query = " ";
 
     $patientID = textBoxValue('patientID');
+    $insurance_no = textBoxValue('insurance_no');
     $company_name = textBoxValue('company_name');
     $branch_name = textBoxValue('branch_name');
     $contact_no = textBoxValue('contact_no');
@@ -17,7 +18,7 @@ if (isset($_POST['btn-add-next'])) {
     $sub_contact_no = textBoxValue('sub_contact_no') ? textBoxValue('sub_contact_no') : "";
     $sub_address = textBoxValue('sub_address') ? textBoxValue('sub_address') : "";
 
-    $sq = "INSERT INTO insurance VALUES ($patientID, '$company_name', '$branch_name', '$contact_no', '$branch_address', '$sub_fname', '$sub_lname', '$sub_relationship', '$sub_contact_no', '$sub_address')";
+    $sq = "INSERT INTO insurance VALUES ($patientID, '$insurance_no', '$company_name', '$branch_name', '$contact_no', '$branch_address', '$sub_fname', '$sub_lname', '$sub_relationship', '$sub_contact_no', '$sub_address')";
     if (mysqli_query($conn, $sq)) {
 ?>
         <script>
@@ -39,6 +40,9 @@ if (isset($_POST['btn-add-next'])) {
             <form action="" method="post" class="w-100">
                 <div class="pt-2">
                     <?php inputElement("patientID", "text", "Patient ID", "", ""); ?>
+                </div>
+                <div class="pt-2">
+                    <?php inputElement("insurance_no", "text", "Insurance Number", "", ""); ?>
                 </div>
                 <div class="pt-2">
                     <?php inputElement("company_name", "text", "Company Name", "", ""); ?>

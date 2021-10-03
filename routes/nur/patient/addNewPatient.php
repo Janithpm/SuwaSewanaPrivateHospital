@@ -3,14 +3,13 @@
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/dbConn.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/customFunc/textBoxValue.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/components/inputElement.php');
-
+date_default_timezone_set("Asia/Colombo");
 if (isset($_POST['btn-add-patient'])) {
-    $query = "";
+
     $patient_name = textboxValue("patient_name");
-    $patient_dob = textboxValue("patient_dob");
     $patient_type = textboxValue("patient_type");
 
-    $query = "INSERT INTO patient (name, dob, type) VALUES ('$patient_name', '$patient_dob', '$patient_type')";
+    $query = "INSERT INTO patient (name, type) VALUES ('$patient_name', '$patient_type')";
     if (mysqli_query($conn, $query)) {
 
         $sq = "SELECT patientID from patient ORDER BY patientID DESC LIMIT 1";
@@ -22,24 +21,46 @@ if (isset($_POST['btn-add-patient'])) {
 
             if ($patient_type == 'IN') {
                 $patient_bedID = textboxValue("patient_bedID");
+                $patient_wordID = textboxValue("patient_wordID");
+                $patient_dob = textboxValue("patient_dob");
                 $patient_admit_by = textboxValue("patient_admit_by");
-                $admited_date = textboxValue("admited_date");
-                $admited_time = textboxValue("admited_time");
-                $query = "INSERT INTO in_patient (patientID, bedID, admit_by, admited_date, admited_time) VALUES ($patientID, $patient_bedID, $patient_admit_by, '$admited_date', '$admited_time')";
-            } else if ($patient_type == 'OUT') {
-                $arrived_date = textboxValue("arrived_date");
-                $arrived_time = textboxValue("arrived_time");
-                $query = "INSERT INTO out_patient (patientID, arrived_date, arrived_time) VALUES ($patientID, '$arrived_date', '$arrived_time')";
-            }
-
-            if (mysqli_query($conn, $query)) {
+                $admited_date = textboxValue("admited_date") ? textboxValue("admited_date") : date("Y-m-d");
+                $admited_time = textboxValue("admited_time") ? textboxValue("admited_time") : date("h:i:sa");
+                $query = "INSERT INTO in_patient (patientID, dob, bedID) VALUES ($patientID,'$patient_dob', $patient_bedID)";
+                $sq1 = "INSERT INTO patient_assign_to (patientID, wordID, admit_date, admit_time) VALUES ($patientID, $patient_wordID, '$admited_date', '$admited_time')";
+                $sq2 = "INSERT INTO patient_admit VALUES ($patientID, $patient_admit_by)";
+                if (mysqli_query($conn, $query)) {
+                    if (mysqli_query($conn, $sq1)) {
+                        if (mysqli_query($conn, $sq2)) {
 ?>
-                <script>
-                    alert("New Patient added Successfully\nDPatient Name : <?php echo $patient_name; ?>\nPatient ID : <?php echo $patinetID; ?>")
-                </script>
+                            <script>
+                                alert("New In Patient added Successfully\nPatient ID : <?php echo $patientID; ?>\nPatient Name : <?php echo $patient_name; ?>")
+                            </script>
+                    <?php
+                        } else {
+                            echo $conn->error;
+                        }
+                    } else {
+                        echo $conn->error;
+                    }
+                } else {
+                    echo $conn->error;
+                }
+            } else if ($patient_type == 'OUT') {
+                $arrived_date = textboxValue("arrived_date") ? textboxValue("arrived_date") : date("Y-m-d");
+                $arrived_time = textboxValue("arrived_time") ? textboxValue("arrived_time") : date("h:i:sa");
+                $query = "INSERT INTO out_patient (patientID, arrived_date, arrived_time) VALUES ($patientID, '$arrived_date', '$arrived_time')";
+
+
+                if (mysqli_query($conn, $query)) {
+                    ?>
+                    <script>
+                        alert("New Out Patient added Successfully\nPatient ID : <?php echo $patientID; ?>\nPatient Name : <?php echo $patient_name; ?>")
+                    </script>
 <?php
-            } else {
-                echo "error" . $conn->error;
+                } else {
+                    echo "error" . $conn->error;
+                }
             }
         }
     } else {
@@ -56,9 +77,6 @@ if (isset($_POST['btn-add-patient'])) {
             <form action="" method="post" class="w-100">
                 <div class="pt-2">
                     <?php inputElement("patient_name", "text", "Patient Name", "", ""); ?>
-                </div>
-                <div class="pt-2">
-                    <?php inputElement("patient_dob", "text", "Patient Date Of Birth", "", ""); ?>
                 </div>
 
                 <div class="pt-2">
@@ -97,23 +115,34 @@ if (isset($_POST['btn-add-patient'])) {
     function inP() {
         document.getElementById("addNewPatinetAdditional").innerHTML = `
     <div class="row">
+
+        <div class="form-group mb-2 col-md-4">
+            <label for="patient_dob">Patient Date Of Birth</label>
+            <input type="text" class="form-control" id="patient_dob" name="patient_dob">
+        </div>
+        <div class="form-group mb-2 col-md-4">
+            <label for="dea_no">Word ID</label>
+            <input type="text" class="form-control" id="patient_wordID" name="patient_wordID">
+        </div>
+       
         <div class="form-group mb-2 col-md-4">
             <label for="dea_no">Bed ID</label>
             <input type="text" class="form-control" id="patient_bedID" name="patient_bedID">
         </div>
-        <div class="form-group mb-2 col-md-4">
+       
+    </div>
+    <div class="row">
+    <div class="form-group mb-2 col-md-4">
             <label for="speciality">Admited By ( Doctor's Employee ID )</label>
             <input type="text" class="form-control" id="patient_admit_by" name="patient_admit_by">
         </div>
-    </div>
-    <div class="row">
         <div class="form-group mb-2 col-md-4">
             <label for="medC_reg_no">Admitted Date</label>
-            <input type="text" class="form-control" id="admited_date" name="admited_date">
+            <input type="text" class="form-control" id="admited_date" name="admited_date" placeholder="Default : Today">
         </div>
         <div class="form-group mb-2 col-md-4">
             <label for="medC_joined_date">Admitted Time</label>
-            <input type="text" class="form-control" id="admited_time" name="admited_time">
+            <input type="text" class="form-control" id="admited_time" name="admited_time" placeholder="Default : Now">
         </div>
     </div>
     `;

@@ -11,10 +11,8 @@ if ($USER['type'] == "MANG") {
     header("location:doct/doc.php");
 } else if ($USER['type'] == "NUR") {
     header("location:nur/nur.php");
-}
-// else if ($USER['type'] == "RESP") {
-//     header("location:resp/resp.php");
-// } 
-else {
+} else if ($USER['type'] == "SUPMANG") {
+    header("location:supmang/supmang.php");
+} else {
     header("location:../index.php");
 }

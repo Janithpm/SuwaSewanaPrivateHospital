@@ -14,16 +14,15 @@ if (isset($_GET['btn-select'])) {
     $recorded_date = $values[2];
     $recorded_time = $values[3];
 
-    $sq = "SELECT name, dob FROM patient WHERE patientID = $patinetID";
+    $sq = "SELECT name FROM patient WHERE patientID = $patinetID";
     $result = mysqli_query($conn, $sq);
     if (!$result) echo "patient" . $conn->error;
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $patient_name = $row['name'];
-        $patient_dob = $row['dob'];
 
         if ($patient_type == 'IN') {
-            $sq = "SELECT * FROM in_patient_daily_record WHERE patientID = $patinetID";
+            $sq = "SELECT *, in_patient.dob FROM in_patient_daily_record INNER JOIN in_patient ON in_patient_daily_record.patientID = in_patient.patientID WHERE in_patient_daily_record.patientID = $patinetID";
         } else {
             $sq = "SELECT * FROM out_patient_record WHERE patientID = $patinetID";
         }
@@ -106,6 +105,18 @@ if (isset($_GET['btn-select'])) {
                                         <td>:</td>
                                         <td><?php echo $patient_name; ?></td>
                                     </tr>
+                                    <?php
+                                    if (isset($row['dob'])) {
+                                        $patient_dob = $row['dob'];
+                                    ?>
+                                        <tr>
+                                            <td>Patient Date Of Birth</td>
+                                            <td>:</td>
+                                            <td><?php echo $patient_dob; ?></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
                                     <tr>
                                         <td>Recorded Date</td>
                                         <td>:</td>
@@ -115,11 +126,6 @@ if (isset($_GET['btn-select'])) {
                                         <td>Recorded Time</td>
                                         <td>:</td>
                                         <td><?php echo $recorded_time; ?></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Patient Date Of Birth</td>
-                                        <td>:</td>
-                                        <td><?php echo $patient_dob; ?></td>
                                     </tr>
                                     <tr>
                                         <td>Recorded BY</td>

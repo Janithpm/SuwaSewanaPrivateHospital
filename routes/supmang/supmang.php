@@ -7,23 +7,12 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/components/buttonElement.php');
 
 $USER = getSessionData();
 
-
-if (isset($_POST['PatientPanel'])) {
-    header('Location: patient/patient.php');
+if (isset($_POST['VendorPanel'])) {
+    header('Location: vendor/vendor.php');
 }
-if (isset($_POST['ReportPanel'])) {
-    header('Location: report/report.php');
+if (isset($_POST['SuppliesPanel'])) {
+    header('Location: supplies/supplies.php');
 }
-if (isset($_POST['EmeContactPanel'])) {
-    header('Location: emegencyContact/emegencyContact.php');
-}
-if (isset($_POST['InsurancePanel'])) {
-    header('Location: insurance/insurance.php');
-}
-
-
-
-
 
 
 
@@ -44,6 +33,8 @@ if (isset($_POST['InsurancePanel'])) {
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous" defer></script>
 
+    <!-- <script src="sections/addNewEmp.js" defer></script> -->
+    <!-- <script src="sections/viewEmp.js" defer></script> -->
     <style>
         * {
             margin: 0;
@@ -60,37 +51,21 @@ if (isset($_POST['InsurancePanel'])) {
 <body>
     <main>
         <div class="container">
-            <?php titleBox("DASHBOARD : NURSE", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../config/logout.php", "mang.php", false); ?>
+            <?php titleBox("DASHBOARD : MANAGER", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../config/logout.php", "supmang.php", false); ?>
             <form method="post" action="" class="mt-5">
-                <div class="row" style="margin:15px 0;">
+                <div class="row text-center" style="margin:15px 0;">
                     <div class="col-md-6" style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Patient Management</h5>
-                            <p class="p">View / Add / Update Patient Details</p>
-                            <button name="PatientPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                            <h5 class="h5">Vendor Management</h5>
+                            <p class="p">View / Add / Update / Delete <br>Vendor Details</p>
+                            <button name="VendorPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
                     <div class="col-md-6" style="height: 250px;">
                         <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Report Management</h5>
-                            <p class="p">View / Add / Update / Report Details</p>
-                            <button name="ReportPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin:15px 0;">
-                    <div class="col-md-6" style="height: 250px;">
-                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Emegency Contact</h5>
-                            <p class="p">View / Add / Update Emegency Contact</p>
-                            <button name="EmeContactPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
-                        </div>
-                    </div>
-                    <div class="col-md-6" style="height: 250px;">
-                        <div class="d-flex flex-column justify-content-center align-items-center bg-light m-10 h-100 rounded shadow">
-                            <h5 class="h5">Insurance Details</h5>
-                            <p class="p">View / Add / Update / Insurence Details</p>
-                            <button name="InsurancePanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
+                            <h5 class="h5">Supplies Management</h5>
+                            <p class="p">View / Add Update <br>Supplies Records</p>
+                            <button name="SuppliesPanel" class="btn btn-primary" style="margin: 10px 30px;">Open Panel</button>
                         </div>
                     </div>
                 </div>

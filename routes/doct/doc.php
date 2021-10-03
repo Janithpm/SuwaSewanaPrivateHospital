@@ -4,6 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/config/session.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/components/titleBox.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/components/inputElement.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/components/buttonElement.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/customFunc/textBoxValue.php');
 date_default_timezone_set('Asia/Colombo');
 $USER = getSessionData();
 
@@ -12,19 +13,19 @@ if (isset($_POST['btn-discharge'])) {
     if (isset($_GET['id'])) {
         $values = explode(" ", $_GET['id']);
         $patient_type = $values[0];
-        $patinetID = $values[1];
+        $paitentID = $values[1];
 
         $discharged_date = date("Y-m-d");
         $discharged_time = date("h:i:sa");
 
-        $sq =  "UPDATE in_patient SET discharged_date = '$discharged_date', discharged_time = '$discharged_time' WHERE patientID = $patinetID";
+        $sq =  "UPDATE patient_assign_to SET discharge_date = '$discharged_date', discharge_time = '$discharged_time' WHERE patientID = $paitentID";
 
         if (mysqli_query($conn, $sq)) {
 ?>
             <script>
-                alert("Patient ID<?php echo $paitentID ?>\n Dischage Date - Time : <?php echo $discharge_date . " " . $discharge_time ?>")
+                alert("Patient ID<?php echo $paitentID ?>\n Dischage Date - Time : <?php echo $discharged_date . " " . $discharged_time ?>")
             </script>
-        <?php
+            <?php
         } else {
             echo $conn->error;
         }
@@ -32,23 +33,40 @@ if (isset($_POST['btn-discharge'])) {
 }
 
 
-if (isset($_POST['btn-admit'])) {
+if (isset($_POST['patient-admit'])) {
     if (isset($_GET['id'])) {
         $values = explode(" ", $_GET['id']);
         $patient_type = $values[0];
         $patientID = $values[1];
-
         $docID = $_SESSION['employeeID'];
+        $admit_date = date("Y-m-d");
+        $admit_time = date("h:i:sa");
+        $patient_wordID = textBoxValue('patient_wordID');
+        $patient_bedID = textBoxValue('patient_bedID');
+        $patient_dob = textBoxValue('patient_dob');
 
-        $sq =  "INSERT INTO patient_admit VALUES ($patientID, $docID)";
+        $sq = "UPDATE patient SET type = 'IN' WHERE patientID = $patientID";
         if (mysqli_query($conn, $sq)) {
-
-            $admit
-        ?>
-            <script>
-                alert("Patient ID<?php echo $paitentID ?>\n Admited_by : <?php echo $DocID ?>")
-            </script>
+            $sq = "INSERT INTO in_patient VALUES ($patientID, '$patient_dob', $patient_bedID)";
+            if (mysqli_query($conn, $sq)) {
+                $sq = "INSERT INTO patient_assign_to (patientID, wordID, admit_date, admit_time) VALUES  ($patientID, $patient_wordID, '$admit_date', '$admit_time')";
+                if (mysqli_query($conn, $sq)) {
+                    $sq = "INSERT INTO patient_admit VALUES ($patientID, $docID)";
+                    if (mysqli_query($conn, $sq)) {
+            ?>
+                        <script>
+                            alert("Patient ID<?php echo $patientID ?>\n Admited_by : <?php echo $DocID ?>")
+                        </script>
 <?php
+                    } else {
+                        echo $conn->error;
+                    }
+                } else {
+                    echo $conn->error;
+                }
+            } else {
+                echo $conn->error;
+            }
         } else {
             echo $conn->error;
         }
@@ -92,16 +110,17 @@ if (isset($_POST['btn-admit'])) {
     <main>
         <div class="container">
             <?php titleBox("DASHBOARD : DOCTOR", $USER['usr_name'], "Hello, Welcome Back", $USER['employeeID'], "dark", "../../../config/logout.php", "doc.php", true); ?>
-            <div id="viewReport">
-                <?php include('viewReport.php') ?>
+            <div class="mt-5">
+                <div id="viewReport">
+                    <?php include('viewReport.php') ?>
+                </div>
+                <div id="discharge" style="display: none">
+                    <?php include('discharge.php') ?>
+                </div>
+                <div id="admit" style="display:none">
+                    <?php include('admit.php') ?>
+                </div>
             </div>
-            <div id="discharge" style="display: none">
-                <?php include('discharge.php') ?>
-            </div>
-            <div id="admit" style="display:none">
-                <?php include('admit.php') ?>
-            </div>
-
             <div style="width:100%; height:50px;"></div>
         </div>
 

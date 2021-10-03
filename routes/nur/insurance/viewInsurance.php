@@ -13,6 +13,7 @@ if (isset($_POST['btn-search'])) {
     if (mysqli_num_rows($result) > 0) {
         $patientID = $row['patientID'];
         $_SESSION['patientID'] = $patientID;
+        $insurance_no = $row['insurance_no'];
         $company_name = $row['company_name'];
         $branch_name = $row['branch_name'];
         $contact_no = $row['contact_no'];
@@ -32,6 +33,7 @@ if (isset($_POST['btn-search'])) {
 
 if (isset($_POST['btn-save'])) {
     $patientID = (int)$_SESSION['patientID'];
+    $insurance_no = textBoxValue('insurance_no');
     $company_name = textBoxValue('company_name');
     $branch_name = textBoxValue('branch_name');
     $contact_no = textBoxValue('contact_no');
@@ -41,7 +43,7 @@ if (isset($_POST['btn-save'])) {
     $sub_relationship = textBoxValue('sub_relationship');
     $sub_contact_no = textBoxValue('sub_contact_no');
     $sub_address = textBoxValue('sub_address');
-    $sq = "UPDATE insurance SET company_name='$company_name', branch_name='$branch_name', contact_no='$contact_no', branch_address='$branch_address', sub_fname='$sub_fname', sub_lname='$sub_lname', sub_relationship='$sub_relationship', sub_contact_no='$sub_contact_no', sub_address='$sub_address' WHERE patientID = $patientID ";
+    $sq = "UPDATE insurance SET insurance_no = '$insurance_no', company_name='$company_name', branch_name='$branch_name', contact_no='$contact_no', branch_address='$branch_address', sub_fname='$sub_fname', sub_lname='$sub_lname', sub_relationship='$sub_relationship', sub_contact_no='$sub_contact_no', sub_address='$sub_address' WHERE patientID = $patientID ";
     if (!mysqli_query($conn, $sq)) {
         echo $conn->error;
     }
@@ -100,6 +102,12 @@ if (isset($_POST['btn-delete'])) {
                         </div>
                     </div>
 
+                    <div class="pt-2">
+                        <div class="form-group mb-3">
+                            <label for="name">Insurance Number</label>
+                            <input type="text" name="insurance_no" class="form-control" id="sub_insurance_no" value="<?php echo $insurance_no; ?>" disabled>
+                        </div>
+                    </div>
                     <div class="pt-2">
                         <div class="form-group mb-3">
                             <label for="name">Company Name</label>
@@ -179,6 +187,7 @@ if (isset($_POST['btn-delete'])) {
                     <button name="btn-save" style="margin-right:20px; margin-left: 0;" class="btn btn-danger" id='btn-save'>Save</button>
                     <a onclick="disableEdit()" class="btn btn-success">Cancel</a>
             `;
+                document.getElementById('sub_insurance_no').disabled = false;
                 document.getElementById('sub_company_name').disabled = false;
                 document.getElementById('sub_branch_name').disabled = false;
                 document.getElementById('sub_int_contact_no').disabled = false;
@@ -192,6 +201,7 @@ if (isset($_POST['btn-delete'])) {
             }
 
             function disableEdit() {
+                document.getElementById('sub_insurance_no').disabled = true;
                 document.getElementById('sub_company_name').disabled = true;
                 document.getElementById('sub_branch_name').disabled = true;
                 document.getElementById('sub_int_contact_no').disabled = true;
